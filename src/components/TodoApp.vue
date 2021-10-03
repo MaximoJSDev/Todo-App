@@ -37,11 +37,11 @@ export default {
       const html = document.documentElement;
       html.classList.toggle("light");
       if (html.classList.contains("light")) {
-        toggleMoon.src = "/img/icon-moon.e66b8c62.svg";
-        //toggleMoon.src = "../assets/icon-sun.svg";
+        //toggleMoon.src = "/img/icon-moon.e66b8c62.svg";
+        toggleMoon.src = "../assets/icon-sun.svg";
       } else {
-        toggleMoon.src = "/img/icon-sun.b3182f3b.svg";
-        //toggleMoon.src = "../assets/icon-moon.svg";
+        //toggleMoon.src = "/img/icon-sun.b3182f3b.svg";
+        toggleMoon.src = "../assets/icon-moon.svg";
       }
     };
 
