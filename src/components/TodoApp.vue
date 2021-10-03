@@ -1,0 +1,149 @@
+<template>
+  <header class="header">
+    <div class="header__title-content">
+      <h1 class="header__title">TODO</h1>
+      <img
+        src="../assets/icon-sun.svg"
+        alt="icono noche/luna"
+        @click="toggleLight"
+        class="sun-night"
+      />
+    </div>
+  </header>
+  <main class="main">
+    <TodoCreate />
+    <TodoList />
+    <span class="dragAndDrop">Drag and drop to reorder list</span>
+  </main>
+</template>
+
+<script>
+import { provide, ref, watchEffect } from "vue";
+import TodoCreate from "./TodoCreate.vue";
+import TodoList from "./TodoList.vue";
+
+export default {
+  components: { TodoCreate, TodoList },
+  setup() {
+    const todos = ref([]);
+    provide("todos", todos);
+
+    if (localStorage.getItem("todos")) {
+      todos.value = JSON.parse(localStorage.getItem("todos"));
+    }
+
+    const toggleLight = () => {
+      const toggleMoon = document.querySelector(".sun-night");
+      const html = document.documentElement;
+      html.classList.toggle("light");
+      if (html.classList.contains("light")) {
+        toggleMoon.src = "/img/icon-moon.e66b8c62.svg";
+        //toggleMoon.src = "../assets/icon-sun.svg";
+      } else {
+        toggleMoon.src = "/img/icon-sun.b3182f3b.svg";
+        //toggleMoon.src = "../assets/icon-moon.svg";
+      }
+    };
+
+    watchEffect(() =>
+      localStorage.setItem("todos", JSON.stringify(todos.value))
+    );
+
+    return { toggleLight };
+  },
+};
+</script>
+
+<style>
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: no-repeat url(../assets/bg-desktop-dark.jpg) center/cover;
+  min-height: 38vh;
+}
+.light .header {
+  background-image: url(../assets/bg-desktop-light.jpg);
+}
+.header__title-content {
+  width: 650px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transform: translateY(-60px);
+}
+.header__title {
+  color: #fff;
+  font-size: 3.2rem;
+  margin: 0;
+  padding-top: 10px;
+  letter-spacing: 20px;
+}
+.sun-night {
+  height: 2.7rem;
+  cursor: pointer;
+  padding: 5px;
+}
+.main {
+  width: 40.625rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin: auto;
+  color: var(--Light-Grayish-Blue);
+  transform: translateY(-155px);
+}
+.dragAndDrop {
+  font-size: 14px;
+  font-weight: bold;
+  color: var(--Very-Dark-Grayish-Blue);
+  margin-top: 2rem;
+}
+@media (max-width: 700px) {
+  body {
+    font-size: 18px !important;
+  }
+  .header {
+    min-height: 265px;
+    background-image: url("../assets/bg-mobile-dark.jpg");
+  }
+  .light .header {
+    background-image: url("../assets/bg-mobile-light.jpg");
+  }
+  .header__title-content,
+  .form,
+  .todo-list {
+    width: 88%;
+  }
+  .header__title-content {
+    transform: translateY(-64px);
+  }
+  .header__title {
+    font-size: 2.4rem;
+  }
+  .form {
+    padding: 1.15rem 1rem;
+  }
+  .main {
+    width: auto;
+    transform: translateY(-135px);
+  }
+  .todo-item {
+    padding: 0.9rem 1rem;
+  }
+  .circle-check {
+    margin-right: 1rem;
+  }
+  .task {
+    font-size: 16px;
+  }
+  .footer {
+    font-size: 13px;
+  }
+  .filter {
+    font-size: 16px;
+    font-weight: bold;
+  }
+}
+</style>
