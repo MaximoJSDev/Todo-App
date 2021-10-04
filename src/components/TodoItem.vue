@@ -18,7 +18,7 @@
         :class="
           todo.state
             ? 'task-completed'
-            : 'task-incompleted'
+            : 'task-incompleted' 
         "
         >{{ todo.text }}</p
       >

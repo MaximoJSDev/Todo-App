@@ -27,7 +27,6 @@ export default {
       const filter = document.querySelector(".filter");
       newFooter.appendChild(filter);
       newFooter.classList.add("filters-container");
-      console.log(window.screen.width);
 
     };
     onMounted(() => {

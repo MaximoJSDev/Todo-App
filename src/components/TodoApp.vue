@@ -3,7 +3,7 @@
     <div class="header__title-content">
       <h1 class="header__title">TODO</h1>
       <img
-        src="../assets/icon-sun.svg"
+        :src="light"
         alt="icono noche/luna"
         @click="toggleLight"
         class="sun-night"
@@ -24,6 +24,22 @@ import TodoList from "./TodoList.vue";
 
 export default {
   components: { TodoCreate, TodoList },
+  data() {
+    return {
+      light: "../icon-sun.svg",
+    }
+  },
+  methods: {
+    toggleLight() {
+      const html = document.documentElement;
+      html.classList.toggle("light");
+      if (html.classList.contains("light")) {
+        this.light = "../icon-moon.svg";
+      } else {
+        this.light = "../icon-sun.svg";
+      }
+    },
+  },
   setup() {
     const todos = ref([]);
     provide("todos", todos);
@@ -31,25 +47,9 @@ export default {
     if (localStorage.getItem("todos")) {
       todos.value = JSON.parse(localStorage.getItem("todos"));
     }
-
-    const toggleLight = () => {
-      const toggleMoon = document.querySelector(".sun-night");
-      const html = document.documentElement;
-      html.classList.toggle("light");
-      if (html.classList.contains("light")) {
-        //toggleMoon.src = "/img/icon-moon.e66b8c62.svg";
-        toggleMoon.src = "../assets/icon-sun.svg";
-      } else {
-        //toggleMoon.src = "/img/icon-sun.b3182f3b.svg";
-        toggleMoon.src = "../assets/icon-moon.svg";
-      }
-    };
-
     watchEffect(() =>
       localStorage.setItem("todos", JSON.stringify(todos.value))
     );
-
-    return { toggleLight };
   },
 };
 </script>
@@ -59,11 +59,12 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: no-repeat url(../assets/bg-desktop-dark.jpg) center/cover;
+  background: no-repeat url("../assets/bg-desktop-dark.jpg")
+    center/cover;
   min-height: 38vh;
 }
 .light .header {
-  background-image: url(../assets/bg-desktop-light.jpg);
+  background-image: url("../assets/bg-desktop-light.jpg");
 }
 .header__title-content {
   width: 650px;
