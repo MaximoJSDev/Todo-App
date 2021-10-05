@@ -7,10 +7,8 @@ import TodoApp from "./components/TodoApp.vue";
 
 export default {
   name: "App",
-  components: {
-    TodoApp,
-  },
-};
+  components: { TodoApp },
+}
 </script>
 
 <style>

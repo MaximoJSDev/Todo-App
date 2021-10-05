@@ -1,20 +1,26 @@
 <template>
   <ul class="todo-list">
-    <TodoItem v-for="todo in todos" :key="todo.id" :todo="todo" />
+    <draggable :list="todos">
+      <transition-group>
+        <TodoListItem v-for="todo in todos" :key="todo.id" :todo="todo" />
+      </transition-group>
+    </draggable>
+
     <li v-if="todos.length === 0" class="todo-item zero-todos">
       Create a new todo!
     </li>
-    <TodoFooter v-else />
+    <TodoListFooter v-else />
   </ul>
 </template>
 
 <script>
 import { computed, inject, provide, ref } from "@vue/runtime-core";
-import TodoItem from "./TodoItem.vue";
-import TodoFooter from "./TodoFooter.vue";
+import TodoListItem from "./TodoListItem.vue";
+import TodoListFooter from "./TodoListFooter.vue";
+import { VueDraggableNext } from "vue-draggable-next";
 
 export default {
-  components: { TodoItem, TodoFooter },
+  components: { TodoListItem, TodoListFooter, draggable: VueDraggableNext },
   setup() {
     const todosTodos = inject("todos");
     const stateFilter = ref("All");
@@ -27,7 +33,6 @@ export default {
         return todosTodos.value.filter((item) => item.state === true);
       }
     });
-
     provide("stateFilter", stateFilter);
 
     return { todos };
@@ -44,7 +49,7 @@ export default {
   margin-top: 27px;
   box-shadow: 0px 48px 70px -10px rgba(0, 0, 0, 0.24);
 }
-.light .todo-list {  
+.light .todo-list {
   box-shadow: 0px 30px 45px -10px rgba(0, 0, 0, 0.11);
 }
 .zero-todos.zero-todos {

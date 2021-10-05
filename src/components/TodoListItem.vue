@@ -15,13 +15,10 @@
       <p
         @click="completed(todo.id)"
         class="task"
-        :class="
-          todo.state
-            ? 'task-completed'
-            : 'task-incompleted' 
-        "
-        >{{ todo.text }}</p
+        :class="todo.state ? 'task-completed' : 'task-incompleted'"
       >
+        {{ todo.text }}
+      </p>
     </div>
     <img
       @click="deleteTask(todo.id)"

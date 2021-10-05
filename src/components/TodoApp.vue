@@ -11,42 +11,36 @@
     </div>
   </header>
   <main class="main">
-    <TodoCreate />
-    <TodoList />
+    <TodoAppCreate />
+    <TodoAppList />
     <span class="dragAndDrop">Drag and drop to reorder list</span>
   </main>
 </template>
 
 <script>
 import { provide, ref, watchEffect } from "vue";
-import TodoCreate from "./TodoCreate.vue";
-import TodoList from "./TodoList.vue";
+import TodoAppCreate from "./TodoAppCreate.vue";
+import TodoAppList from "./TodoAppList.vue";
 
 export default {
-  components: { TodoCreate, TodoList },
+  components: { TodoAppCreate, TodoAppList },
   data() {
-    return {
-      light: "../icon-sun.svg",
-    }
+    return { light: "../icon-sun.svg" };
   },
   methods: {
     toggleLight() {
       const html = document.documentElement;
       html.classList.toggle("light");
-      if (html.classList.contains("light")) {
-        this.light = "../icon-moon.svg";
-      } else {
-        this.light = "../icon-sun.svg";
-      }
-    },
+      if (html.classList.contains("light")) this.light = "../icon-moon.svg";
+      else this.light = "../icon-sun.svg";
+    }
   },
   setup() {
     const todos = ref([]);
     provide("todos", todos);
 
-    if (localStorage.getItem("todos")) {
+    if (localStorage.getItem("todos"))
       todos.value = JSON.parse(localStorage.getItem("todos"));
-    }
     watchEffect(() =>
       localStorage.setItem("todos", JSON.stringify(todos.value))
     );
@@ -59,8 +53,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: no-repeat url("../assets/bg-desktop-dark.jpg")
-    center/cover;
+  background: no-repeat url("../assets/bg-desktop-dark.jpg") center/cover;
   min-height: 38vh;
 }
 .light .header {
@@ -126,6 +119,9 @@ export default {
   .form {
     padding: 1.15rem 1rem;
   }
+  .form__createTask {
+    font-size: 17.4px;
+  }
   .main {
     width: auto;
     transform: translateY(-135px);
@@ -134,7 +130,7 @@ export default {
     padding: 0.9rem 1rem;
   }
   .circle-check {
-    margin-right: 1rem;
+    margin-right: 0.9rem;
   }
   .task {
     font-size: 16px;

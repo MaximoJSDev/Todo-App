@@ -39,7 +39,7 @@ export default {
 .filters-container .filter {
   background-color: var(--Very-Dark-Desaturated-Blue);
   list-style: none;
-  padding: 1.2rem 1rem;
+  padding: 1.1rem 1rem;
   margin-top: 1.4rem;
   border-radius: 6px;
 }

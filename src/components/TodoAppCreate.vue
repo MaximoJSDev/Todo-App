@@ -35,7 +35,7 @@ export default {
       todos.value.push(todo);
       input.value = "";
     };
-
+    
     return { todoAdd, input };
   },
 };

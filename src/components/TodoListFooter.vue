@@ -1,7 +1,7 @@
 <template>
   <li class="footer todo-item">
     <p>{{ countActives }} Items left</p>
-    <TodoFilter />
+    <TodoFooterFilter />
     <p @click="deleteCompleted" class="footer__clear">Clear completed</p>
   </li>
   <div class="newFooter"></div>
@@ -9,10 +9,10 @@
 
 <script>
 import { computed, inject, onMounted } from "@vue/runtime-core";
-import TodoFilter from "./TodoFilter.vue";
+import TodoFooterFilter from "./TodoFooterFilter.vue";
 
 export default {
-  components: { TodoFilter },
+  components: { TodoFooterFilter },
   setup() {
     const todos = inject("todos");
 
