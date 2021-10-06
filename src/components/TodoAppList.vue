@@ -9,7 +9,7 @@
     <li v-if="todos.length === 0" class="todo-item zero-todos">
       Create a new todo!
     </li>
-    <TodoListFooter v-else />
+    <TodoListFooter />
   </ul>
 </template>
 
