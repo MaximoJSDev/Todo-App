@@ -25,15 +25,16 @@ import TodoAppList from "./TodoAppList.vue";
 export default {
   components: { TodoAppCreate, TodoAppList },
   data() {
-    return { light: "../icon-sun.svg" };
+    return { light: require("@/assets/icon-sun.svg") };
   },
   methods: {
     toggleLight() {
       const html = document.documentElement;
       html.classList.toggle("light");
-      if (html.classList.contains("light")) this.light = "../icon-moon.svg";
-      else this.light = "../icon-sun.svg";
-    }
+      if (html.classList.contains("light"))
+        this.light = require("@/assets/icon-moon.svg");
+      else this.light = require("@/assets/icon-sun.svg");
+    },
   },
   setup() {
     const todos = ref([]);
